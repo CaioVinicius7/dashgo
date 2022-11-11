@@ -42,7 +42,6 @@ export default function UserList() {
 
             <Link href="/users/create">
               <Button
-                as="a"
                 size="sm"
                 fontSize="sm"
                 cursor="pointer"
