@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
@@ -66,6 +67,12 @@ const series = [
 ];
 
 export default function Dashboard() {
+  const [showChart, setShowChart] = useState(false);
+
+  useEffect(() => {
+    setShowChart(true);
+  }, []);
+
   return (
     <>
       <Head>
@@ -81,24 +88,30 @@ export default function Dashboard() {
               <Text fontSize="lg" mb="4">
                 Inscritos da semana
               </Text>
-              <Chart
-                options={options}
-                series={series}
-                type="area"
-                height={160}
-              />
+
+              {showChart && (
+                <Chart
+                  options={options}
+                  series={series}
+                  type="area"
+                  height={160}
+                />
+              )}
             </Box>
 
             <Box p={["6", "8"]} bg="gray.800" borderRadius={8} pb="4">
               <Text fontSize="lg" mb="4">
                 Taxa de abertura
               </Text>
-              <Chart
-                options={options}
-                series={series}
-                type="area"
-                height={160}
-              />
+
+              {showChart && (
+                <Chart
+                  options={options}
+                  series={series}
+                  type="area"
+                  height={160}
+                />
+              )}
             </Box>
           </SimpleGrid>
         </Flex>
