@@ -8,8 +8,13 @@ export default function SignIn() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting }
-  } = useForm();
+    formState: { isSubmitting, errors }
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  });
 
   const handleSignIn: SubmitHandler<FieldValues> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -34,8 +39,21 @@ export default function SignIn() {
           onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">
-            <Input label="E-mail" type="email" {...register("email")} />
-            <Input label="Senha" type="password" {...register("password")} />
+            <Input
+              label="E-mail"
+              type="email"
+              error={errors.email}
+              {...register("email", {
+                required: "E-mail obrigatório"
+              })}
+            />
+
+            <Input
+              label="Senha"
+              type="password"
+              error={errors.password}
+              {...register("password", { required: "Senha obrigatória" })}
+            />
           </Stack>
 
           <Button
