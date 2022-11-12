@@ -12,7 +12,7 @@ export function Pagination() {
       spacing="6"
     >
       <Box>
-        <Text as="strong">0</Text> - <Text as="strong">10</Text> de
+        <Text as="strong">0</Text> - <Text as="strong">10</Text> de{" "}
         <Text as="strong">100</Text>
       </Box>
 
