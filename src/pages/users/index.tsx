@@ -7,6 +7,7 @@ import {
   Flex,
   Heading,
   Icon,
+  IconButton,
   Spinner,
   Table,
   Tbody,
@@ -18,6 +19,7 @@ import {
   useBreakpointValue
 } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { FiRefreshCcw } from "react-icons/fi";
 
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
@@ -26,7 +28,7 @@ import { Sidebar } from "../../components/Sidebar";
 import { useUsers } from "../../services/hooks/useUsers";
 
 export default function UserList() {
-  const { data, isLoading, isFetching, error } = useUsers();
+  const { data, isLoading, isFetching, refetch, error } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -52,6 +54,28 @@ export default function UserList() {
                   <Spinner size="sm" color="gray.500" ml="4" />
                 )}
               </Heading>
+
+              {!isFetching && (
+                <IconButton
+                  aria-label="Refetch users"
+                  icon={<Icon as={FiRefreshCcw} />}
+                  variant="unstyled"
+                  display="flex"
+                  alignItems="center"
+                  mr="auto"
+                  ml="2"
+                  size="sm"
+                  transition="0.2s"
+                  _hover={{
+                    filter: "brightness(0.8)"
+                  }}
+                  onClick={async () =>
+                    await refetch({
+                      queryKey: "users"
+                    })
+                  }
+                />
+              )}
 
               <Link href="/users/create">
                 <Button
