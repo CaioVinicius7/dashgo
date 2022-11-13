@@ -29,10 +29,21 @@ export default function UserList() {
     const response = await fetch("http://localhost:3000/api/users");
     const data = await response.json();
 
-    return data;
-  });
+    const users = data.users.map((user: any) => {
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        createdAt: new Date(user.createdAt).toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        })
+      };
+    });
 
-  console.log(data);
+    return users;
+  });
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -92,92 +103,38 @@ export default function UserList() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    <Tr>
-                      <Td px={["2", "4", "6"]} color="gray.600" w="8">
-                        <Checkbox colorScheme="pink" />
-                      </Td>
-                      <Td>
-                        <Box>
-                          <Text fontWeight="bold">Caio Vinícius</Text>
-                          <Text fontSize="sm" color="gray.300">
-                            Caio1525pereira@gmail.com
-                          </Text>
-                        </Box>
-                      </Td>
-                      {isWideVersion && <Td>10 de Novembro, 2022</Td>}
-                      {isWideVersion && (
-                        <Td>
-                          <Button
-                            as="a"
-                            size="sm"
-                            fontSize="sm"
-                            cursor="pointer"
-                            colorScheme="purple"
-                            leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                          >
-                            Editar
-                          </Button>
+                    {data.map((user: any) => (
+                      <Tr key={user.id}>
+                        <Td px={["2", "4", "6"]} color="gray.600" w="8">
+                          <Checkbox colorScheme="pink" />
                         </Td>
-                      )}
-                    </Tr>
-
-                    <Tr>
-                      <Td px={["2", "4", "6"]} color="gray.600" w="8">
-                        <Checkbox colorScheme="pink" />
-                      </Td>
-                      <Td>
-                        <Box>
-                          <Text fontWeight="bold">Ellen</Text>
-                          <Text fontSize="sm" color="gray.300">
-                            ellen@gmail.com
-                          </Text>
-                        </Box>
-                      </Td>
-                      {isWideVersion && <Td>10 de Novembro, 2022</Td>}
-                      {isWideVersion && (
                         <Td>
-                          <Button
-                            as="a"
-                            size="sm"
-                            fontSize="sm"
-                            cursor="pointer"
-                            colorScheme="purple"
-                            leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                          >
-                            Editar
-                          </Button>
+                          <Box>
+                            <Text fontWeight="bold">{user.name}</Text>
+                            <Text fontSize="sm" color="gray.300">
+                              {user.email}
+                            </Text>
+                          </Box>
                         </Td>
-                      )}
-                    </Tr>
-
-                    <Tr>
-                      <Td px={["2", "4", "6"]} color="gray.600" w="8">
-                        <Checkbox colorScheme="pink" />
-                      </Td>
-                      <Td>
-                        <Box>
-                          <Text fontWeight="bold">Remi</Text>
-                          <Text fontSize="sm" color="gray.300">
-                            remi@gmail.com
-                          </Text>
-                        </Box>
-                      </Td>
-                      {isWideVersion && <Td>10 de Novembro, 2022</Td>}
-                      {isWideVersion && (
-                        <Td>
-                          <Button
-                            as="a"
-                            size="sm"
-                            fontSize="sm"
-                            cursor="pointer"
-                            colorScheme="purple"
-                            leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                          >
-                            Editar
-                          </Button>
-                        </Td>
-                      )}
-                    </Tr>
+                        {isWideVersion && <Td>{user.createdAt}</Td>}
+                        {isWideVersion && (
+                          <Td>
+                            <Button
+                              as="a"
+                              size="sm"
+                              fontSize="sm"
+                              cursor="pointer"
+                              colorScheme="purple"
+                              leftIcon={
+                                <Icon as={RiPencilLine} fontSize="16" />
+                              }
+                            >
+                              Editar
+                            </Button>
+                          </Td>
+                        )}
+                      </Tr>
+                    ))}
                   </Tbody>
                 </Table>
 

@@ -2,6 +2,7 @@ import { createServer, Factory, Model } from "miragejs";
 import { faker } from "@faker-js/faker";
 
 type User = {
+  id: string;
   name: string;
   email: string;
   createdAt: string;
@@ -14,6 +15,9 @@ export function makeServer() {
     },
     factories: {
       user: Factory.extend({
+        id(i) {
+          return i + 1;
+        },
         name(i: number) {
           return `User ${i + 1}`;
         },
@@ -26,7 +30,7 @@ export function makeServer() {
       })
     },
     seeds(server) {
-      server.createList("user", 100);
+      server.createList("user", 10);
     },
     routes() {
       this.namespace = "api";
