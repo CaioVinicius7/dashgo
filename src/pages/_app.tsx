@@ -5,6 +5,12 @@ import { SidebarDrawerProvider } from "../Contexts/SidebarDrawerContext";
 
 import { theme } from "../styles/theme";
 
+import { makeServer } from "../services/mirage";
+
+if(process.env.NODE_ENV === "development") {
+  makeServer();
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
