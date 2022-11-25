@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import NextLink from "next/link";
 import {
@@ -27,14 +28,20 @@ import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
-import { useUsers } from "../../services/hooks/useUsers";
+import { getUsers, User, useUsers } from "../../services/hooks/useUsers";
 import { queryClient } from "../../services/queryClient";
 import { api } from "../../services/api";
 
-export default function UserList() {
+interface UserListProps {
+  users: User[];
+}
+
+export default function UserList({ users }: UserListProps) {
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, isFetching, refetch, error } = useUsers(page);
+  const { data, isLoading, isFetching, refetch, error } = useUsers(page, {
+    initialData: users
+  });
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -186,3 +193,13 @@ export default function UserList() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { users } = await getUsers(1);
+
+  return {
+    props: {
+      users
+    }
+  };
+};
