@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
-import { QueryClientProvider, QueryClient } from "react-query";
+import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import { SidebarDrawerProvider } from "../Contexts/SidebarDrawerContext";
