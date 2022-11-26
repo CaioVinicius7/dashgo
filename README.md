@@ -40,10 +40,6 @@ Esse é o quarto projeto da trilha de react do ignite de 2021 da [Rocketseat](ht
 
 - Hospedado: ❌
 
-[Template no Figma](https://www.figma.com/file/cZbM9GaHGZK7XeXWpv3iyE/Frontend-Challenge?node-id=4%3A2)
-
-[Clique aqui para acessar o projeto](https://frontend-challenge-mevo.vercel.app/)
-
 <br>
 
 ## 📝 Páginas
