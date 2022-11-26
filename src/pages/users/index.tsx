@@ -143,6 +143,8 @@ export default function UserList() {
                             <Link
                               color="purple.500"
                               onMouseEnter={() => handlePrefetchUser(user.id)}
+                              as={NextLink}
+                              href="/users"
                             >
                               <Text fontWeight="bold">{user.name}</Text>
                             </Link>
@@ -155,7 +157,6 @@ export default function UserList() {
                         {isWideVersion && (
                           <Td>
                             <Button
-                              as="a"
                               size="sm"
                               fontSize="sm"
                               cursor="pointer"
