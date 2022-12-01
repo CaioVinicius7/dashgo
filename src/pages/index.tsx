@@ -1,10 +1,15 @@
 import Head from "next/head";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button, Flex, Stack } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { Input } from "../components/Form/Input";
+
+interface SignInUserFormData {
+  email: string;
+  password: string;
+}
 
 const signInFormSchema = yup.object({
   email: yup
@@ -27,11 +32,11 @@ export default function SignIn() {
     resolver: yupResolver(signInFormSchema)
   });
 
-  const handleSignIn: SubmitHandler<FieldValues> = async (values) => {
+  async function handleSignIn(values: SignInUserFormData) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     console.log(values);
-  };
+  }
 
   return (
     <>

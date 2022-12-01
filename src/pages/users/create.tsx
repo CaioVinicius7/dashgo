@@ -11,7 +11,7 @@ import {
   SimpleGrid,
   VStack
 } from "@chakra-ui/react";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMutation } from "react-query";
@@ -80,11 +80,11 @@ export default function CreateUser() {
     resolver: yupResolver(createUserFormSchema)
   });
 
-  const handleCreateUser: SubmitHandler<FieldValues> = async (values: any) => {
+  async function handleCreateUser(values: CreateUserFormData) {
     await createUser.mutateAsync(values);
 
     router.push("/users");
-  };
+  }
 
   return (
     <>
